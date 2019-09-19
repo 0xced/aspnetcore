@@ -16,4 +16,8 @@
     <Compile Include="$(SharedSourceRoot)CertificateGeneration\**\*.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+  </ItemGroup>
+
 </Project>

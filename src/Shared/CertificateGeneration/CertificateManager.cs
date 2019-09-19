@@ -358,9 +358,15 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                 {
-                    diagnostics?.Debug("Trusting the certificate on MAC.");
+                    diagnostics?.Debug("Trusting the certificate on macOS.");
                     TrustCertificateOnMac(publicCertificate, diagnostics);
                 }
+            }
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                diagnostics?.Debug("Trusting the certificate on iOS simulators.");
+                XcodeSimulatorManager.Test(publicCertificate, diagnostics);
             }
         }
 
@@ -784,7 +790,7 @@ namespace Microsoft.AspNetCore.Certificates.Generation
             {
                 try
                 {
-                    result.Diagnostics.Debug("Trying to export the certificate.");
+                    result.Diagnostics.Debug("Trying to trust the certificate.");
                     TrustCertificate(certificate, result.Diagnostics);
                 }
                 catch (UserCancelledTrustException)
